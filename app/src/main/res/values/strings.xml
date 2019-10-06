@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MoviesDb</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_list_empty_msg">Please search movie to see your recent searches here</string>
+    <string name="movie_list_empty_msg">No results matches your search key</string>
+</resources>

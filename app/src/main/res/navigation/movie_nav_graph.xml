@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/movie_navigation"
+    app:startDestination="@id/searchMovieFragment">
+
+    <fragment
+        android:id="@+id/searchMovieFragment"
+        android:name="com.example.moviesdb.view.SearchMovieFragment"
+        android:label="SearchMovieFragment">
+        <action
+            android:id="@+id/action_searchMovieFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieListFragment"
+        android:name="com.example.moviesdb.view.MovieListFragment"
+        android:label="MovieListFragment">
+        <action
+            android:id="@+id/action_movieListFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+        <argument
+            android:name="search_key"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.example.moviesdb.view.MovieDetailsFragment"
+        android:label="MovieDetailsFragment" >
+        <argument
+            android:name="imdb_id"
+            app:argType="string" />
+    </fragment>
+</navigation>
