@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.moviesdb.database.MovieDatabase
 import com.example.moviesdb.database.asDomainModel
+import com.example.moviesdb.model.MovieDetails
 import com.example.moviesdb.model.SearchKeyModel
+import com.example.moviesdb.network.NetworkMovieDetail
 import com.example.moviesdb.network.NetworkMoviesContainer
 import com.example.moviesdb.network.RetrofitObject
 import kotlinx.coroutines.Dispatchers
@@ -29,5 +31,9 @@ class MovieRepository(private val database: MovieDatabase) {
 
     suspend fun fetchMovies(queryMap: HashMap<String, String>): NetworkMoviesContainer {
         return RetrofitObject.service.getMoviesListAsync(queryMap).await()
+    }
+
+    suspend fun fetchMovieDetails(queryMap: HashMap<String, String>): NetworkMovieDetail {
+        return RetrofitObject.service.getMoviesDetailsAsync(queryMap).await()
     }
 }

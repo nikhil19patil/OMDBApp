@@ -5,169 +5,189 @@
 
     <data>
 
+        <variable
+            name="movie"
+            type="com.example.moviesdb.model.MovieDetails" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.MovieDetailsFragment">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_text_plot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto_light"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/left_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_text_language"
-            tools:text="Plot" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".view.MovieDetailsFragment">
 
-        <TextView
-            android:id="@+id/tv_language_name2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto_medium"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/right_guideline"
-            app:layout_constraintStart_toStartOf="@+id/tv_language_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_language_name"
-            tools:text="Karamveer Singh is from a very young age and is good at impersonating the female voice and hence lands up getting female lead roles in mythological plays since his childhood, although he protests every time and would settle for a much smaller but a male role. He is currently unemployed and gets to perform these roles because it fetches him good money." />
+            <TextView
+                android:id="@+id/tv_text_plot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/plot"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_language_name" />
 
-        <TextView
-            android:id="@+id/tv_text_language"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto_light"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/left_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_text_writer"
-            tools:text="Language" />
+            <TextView
+                android:id="@+id/tv_plot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@{movie.Plot}"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintStart_toStartOf="@+id/tv_language_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_language_name"
+                tools:text="Karamveer Singh is from a very young age and is good at impersonating the female voice and hence lands up getting female lead roles in mythological plays since his childhood, although he protests every time and would settle for a much smaller but a male role. He is currently unemployed and gets to perform these roles because it fetches him good money." />
 
-        <TextView
-            android:id="@+id/tv_language_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto_medium"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/tv_text_writer"
-            app:layout_constraintStart_toStartOf="@+id/tv_producer_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_producer_name"
-            tools:text="Hindi" />
+            <TextView
+                android:id="@+id/tv_text_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/language"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_writer_name" />
 
-        <TextView
-            android:id="@+id/tv_producer_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:fontFamily="@font/roboto_medium"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/tv_director_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_director_name"
-            tools:text="Nirmaan D. Singh" />
+            <TextView
+                android:id="@+id/tv_language_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@{movie.Language}"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintStart_toEndOf="@+id/tv_text_writer"
+                app:layout_constraintStart_toStartOf="@+id/tv_writer_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_writer_name"
+                tools:text="Hindi" />
 
-        <TextView
-            android:id="@+id/tv_text_writer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto_light"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/left_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_text_director"
-            tools:text="Writer" />
+            <TextView
+                android:id="@+id/tv_writer_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@{movie.Writer}"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintStart_toStartOf="@+id/tv_director_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_director_name"
+                tools:text="Nirmaan D. Singh" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toTopOf="@+id/top_guideline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic[12]" />
+            <TextView
+                android:id="@+id/tv_text_writer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/writer"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_director_name" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/top_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent=".3" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{movie.Poster}"
+                app:layout_constraintBottom_toTopOf="@+id/top_guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic[12]" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/left_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent=".1" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/top_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="260dp" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/right_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent=".9" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/left_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".1" />
 
-        <TextView
-            android:id="@+id/tv_movie_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/roboto"
-            android:textSize="28sp"
-            app:layout_constraintStart_toStartOf="@+id/left_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            tools:text="Dreamgirl" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/right_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".9" />
 
-        <TextView
-            android:id="@+id/tv_year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/roboto_thin"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_movie_name"
-            app:layout_constraintStart_toEndOf="@+id/tv_movie_name"
-            tools:text="2019" />
+            <TextView
+                android:id="@+id/tv_movie_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="@{movie.Title}"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:text="Dreamgirl" />
 
-        <TextView
-            android:id="@+id/tv_text_director"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/roboto_light"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/left_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_name"
-            tools:text="Director" />
+            <TextView
+                android:id="@+id/tv_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_thin"
+                android:text="@{String.valueOf(movie.Year)}"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_movie_name"
+                tools:text="2019" />
 
-        <TextView
-            android:id="@+id/tv_director_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="18dp"
-            android:fontFamily="@font/roboto_medium"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_text_director"
-            app:layout_constraintStart_toEndOf="@+id/tv_text_director"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_name"
-            app:layout_constraintVertical_bias="0.0"
-            tools:text="Raaj Shaandilyaa" />
+            <TextView
+                android:id="@+id/tv_text_director"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/director"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:rating="4.5"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_year"
-            app:layout_constraintStart_toEndOf="@+id/tv_year" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_director_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@{movie.Director}"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_text_director"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintStart_toEndOf="@+id/tv_text_director"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+                tools:text="Raaj Shaandilyaa" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:rating="@{movie.rating/2}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_year"
+                app:layout_constraintStart_toEndOf="@+id/tv_year"
+                tools:rating="4.5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

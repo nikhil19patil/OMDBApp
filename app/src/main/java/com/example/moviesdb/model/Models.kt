@@ -1,6 +1,7 @@
 package com.example.moviesdb.model
 
 import com.example.moviesdb.database.MovieSearchKey
+import java.lang.NumberFormatException
 import java.util.*
 
 /**
@@ -30,29 +31,44 @@ data class MovieModel(
 )
 
 data class MovieDetails(
-    val title: String,
-    val year: Int,
-    val rated: String,
-    val released: String,
-    val runtime: String,
-    val genre: String,
-    val director: String,
-    val writer: String,
-    val actors: String,
-    val plot: String,
-    val language: String,
-    val country: String,
-    val awards: String,
-    val poster: String,
-    val ratings: List<String>,
-    val metascore: String,
-    val imdbRating: String,
+    val Title: String,
+    val Year: Int,
+    val Rated: String,
+    val Released: String,
+    val Runtime: String,
+    val Genre: String,
+    val Director: String,
+    val Writer: String,
+    val Actors: String,
+    val Plot: String,
+    val Language: String,
+    val Country: String,
+    val Awards: String,
+    val Poster: String,
+    val Ratings: List<Rating>,
+    val Metascore: String,
+    val imdbRating: String?,
     val imdbVotes: String,
     val imdbID: String,
-    val type: String,
-    val dVD: String,
-    val boxOffice: String,
-    val production: String,
-    val website: String,
-    val response: Boolean
+    val Type: String,
+    val DVD: String,
+    val BoxOffice: String,
+    val Production: String,
+    val Website: String,
+    val Response: String
+) {
+    val rating: Float
+        get() {
+            return try {
+                imdbRating?.toFloat() ?: 0.0f
+            } catch (e: NumberFormatException) {
+                0.0f
+            }
+        }
+
+}
+
+data class Rating(
+    val Source: String,
+    val Value: String
 )

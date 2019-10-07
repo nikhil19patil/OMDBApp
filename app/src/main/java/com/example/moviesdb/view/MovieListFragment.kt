@@ -29,8 +29,8 @@ class MovieListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMovieListBinding.inflate(inflater, container, false)
-        binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         val args = MovieListFragmentArgs.fromBundle(arguments!!)
         viewModel.fetchMovies(args.searchKey)
         (activity as MainActivity).setToolbarTitle("Results for \"${args.searchKey}\"")

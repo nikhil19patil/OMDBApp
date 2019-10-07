@@ -12,11 +12,15 @@ import com.example.moviesdb.R
  */
 
 @BindingAdapter("imageUrl")
-fun setImage(view: ImageView, url: String) {
-    Glide.with(view.context)
-        .applyDefaultRequestOptions(RequestOptions()
-            .placeholder(R.drawable.ic_movies_placeholder)
-            .error(R.drawable.ic_movies_placeholder))
-        .load(url)
-        .into(view)
+fun setImage(view: ImageView, url: String?) {
+    url?.let {
+        Glide.with(view.context)
+            .applyDefaultRequestOptions(
+                RequestOptions()
+                    .placeholder(R.drawable.ic_movies_placeholder)
+                    .error(R.drawable.ic_movies_placeholder)
+            )
+            .load(url)
+            .into(view)
+    }
 }

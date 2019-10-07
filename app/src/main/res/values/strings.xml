@@ -5,4 +5,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_list_empty_msg">Please search movie to see your recent searches here</string>
     <string name="movie_list_empty_msg">No results matches your search key</string>
+    <string name="director">Director</string>
+    <string name="writer">Writer</string>
+    <string name="language">Language</string>
+    <string name="plot">Plot</string>
 </resources>
