@@ -2,7 +2,7 @@ package com.example.moviesdb.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.moviesdb.database.getDatabase
@@ -26,9 +26,14 @@ class SearchMovieViewModel(application: Application) : AndroidViewModel(applicat
     private var job = Job()
     private val viewModelScope = CoroutineScope(job + Dispatchers.Main)
 
-    val searchKeyList = movieRepository.searchKeys
+    var searchKeyList: LiveData<List<SearchKeyModel>>
 
-    val showEmptyMessage = MutableLiveData<Boolean>(searchKeyList.value?.isNotEmpty())
+    val showEmptyMessage: Boolean?
+        get() = searchKeyList.value?.isEmpty()
+
+    init {
+        searchKeyList = movieRepository.getSearchKeys()
+    }
 
     fun insertKey(key: String) {
         val date = Date()

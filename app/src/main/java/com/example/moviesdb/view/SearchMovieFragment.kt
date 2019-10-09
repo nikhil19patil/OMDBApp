@@ -18,6 +18,7 @@ import com.example.moviesdb.viewmodel.SearchMovieViewModel
 
 class SearchMovieFragment : Fragment(), SearchView.OnQueryTextListener {
     lateinit var binding: FragmentSearchMovieBinding
+    lateinit var adapter: SearchKeyRVAdapter
 
     private val viewModel: SearchMovieViewModel by lazy {
         val activity = requireNotNull(this.activity) {
@@ -26,27 +27,29 @@ class SearchMovieFragment : Fragment(), SearchView.OnQueryTextListener {
             .get(SearchMovieViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.searchKeyList.observe(this, Observer {
+            adapter.searchKeys = it
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchMovieBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
         (activity as MainActivity).setToolbarTitle("MoviesDb")
         (activity as MainActivity).setBackButtonEnabled(false)
-        val adapter = SearchKeyRVAdapter(ItemClick {
+        adapter = SearchKeyRVAdapter(ItemClick {
             insertKeyInDbAndNavigateToMovieListFragment(it.key)
         })
-        binding.apply {
-            lifecycleOwner = viewLifecycleOwner
-            recyclerView.adapter = adapter
-        }
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+        binding.recyclerView.adapter = adapter
         binding.searchView.setOnQueryTextListener(this)
 
-        viewModel.searchKeyList.observe(this, Observer {
-            adapter.searchKeys = it
-            binding.textView.visibility = View.GONE
-        })
         return binding.root
     }
 
@@ -102,7 +105,6 @@ class SearchKeyRVAdapter(val callback: ItemClick) : RecyclerView.Adapter<SearchK
             it.callback = callback
         }
     }
-
 }
 
 class SearchKeyViewHolder(var movieSearchKeyItemBinding: MovieSearchKeyItemBinding) :

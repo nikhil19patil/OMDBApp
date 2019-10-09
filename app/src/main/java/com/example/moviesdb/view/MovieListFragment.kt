@@ -23,6 +23,19 @@ class MovieListFragment : Fragment() {
         ViewModelProviders.of(this, MovieListViewModel.Factory(activity.application))
             .get(MovieListViewModel::class.java)
     }
+    lateinit var adapter: MovieListRVAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = MovieListRVAdapter(MovieItemClick {
+            navigateToMovieDetailsFragment(it.imdbID)
+        })
+        viewModel.movieList.observe(this, Observer {
+            adapter.movies = it
+            viewModel.showProgressBar.value = false
+            viewModel.showEmptyListMsg.value = it.isEmpty()
+        })
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,16 +48,7 @@ class MovieListFragment : Fragment() {
         viewModel.fetchMovies(args.searchKey)
         (activity as MainActivity).setToolbarTitle("Results for \"${args.searchKey}\"")
         (activity as MainActivity).setBackButtonEnabled(true)
-        val adapter = MovieListRVAdapter(MovieItemClick {
-            navigateToMovieDetailsFragment(it.imdbID)
-        })
         binding.recyclerView.adapter = adapter
-        viewModel.movieList.observe(this, Observer {
-            adapter.movies = it
-            viewModel.showProgressBar.value = false
-            viewModel.showEmptyListMsg.value = it.isEmpty()
-        })
-
         return binding.root
     }
 

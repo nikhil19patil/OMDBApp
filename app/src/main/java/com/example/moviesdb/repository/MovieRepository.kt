@@ -17,10 +17,10 @@ import kotlinx.coroutines.withContext
  */
 class MovieRepository(private val database: MovieDatabase) {
 
-    val searchKeys: LiveData<List<SearchKeyModel>> = Transformations.map(
-        database.movieSearchKeyDao.getAllSearchKeys()
-    ) {
-        it.asDomainModel()
+    fun getSearchKeys() : LiveData<List<SearchKeyModel>> {
+        return Transformations.map(database.movieSearchKeyDao.getAllSearchKeys()) {
+            it.asDomainModel()
+        }
     }
 
     suspend fun insertKey(searchKeyModel: SearchKeyModel) {

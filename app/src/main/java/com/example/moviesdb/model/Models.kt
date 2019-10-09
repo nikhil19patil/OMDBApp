@@ -51,7 +51,6 @@ data class MovieDetails(
     val imdbVotes: String,
     val imdbID: String,
     val Type: String,
-    val DVD: String,
     val BoxOffice: String,
     val Production: String,
     val Website: String,
