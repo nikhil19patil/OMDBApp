@@ -54,18 +54,22 @@ class SearchMovieFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun insertKeyInDbAndNavigateToMovieListFragment(key: String) {
-        viewModel.insertKey(key)
-        binding.root.findNavController()
-            .navigate(
-                SearchMovieFragmentDirections
-                    .actionSearchMovieFragmentToMovieListFragment(key)
-            )
+        if ((activity as MainActivity).connectedToNetwork) {
+            viewModel.insertKey(key)
+            binding.root.findNavController()
+                .navigate(
+                    SearchMovieFragmentDirections
+                        .actionSearchMovieFragmentToMovieListFragment(key)
+                )
+        } else {
+            (activity as MainActivity).displayOfflineSnack()
+        }
     }
 
     override fun onQueryTextSubmit(key: String?): Boolean {
         key?.let {
-            viewModel.insertKey(key)
             insertKeyInDbAndNavigateToMovieListFragment(key)
+
         }
         return false
     }
@@ -76,7 +80,6 @@ class SearchMovieFragment : Fragment(), SearchView.OnQueryTextListener {
 }
 
 class ItemClick(val block: (SearchKeyModel) -> Unit) {
-
     fun onClick(searchKeyModel: SearchKeyModel) = block(searchKeyModel)
 }
 

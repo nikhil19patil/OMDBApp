@@ -45,19 +45,23 @@ class MovieListFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         val args = MovieListFragmentArgs.fromBundle(arguments!!)
-        viewModel.fetchMovies(args.searchKey)
         (activity as MainActivity).setToolbarTitle("Results for \"${args.searchKey}\"")
         (activity as MainActivity).setBackButtonEnabled(true)
         binding.recyclerView.adapter = adapter
+        viewModel.fetchMovies(args.searchKey)
         return binding.root
     }
 
     private fun navigateToMovieDetailsFragment(imdbId: String) {
-        binding.root.findNavController()
-            .navigate(
-                MovieListFragmentDirections
-                    .actionMovieListFragmentToMovieDetailsFragment(imdbId)
-            )
+        if ((activity as MainActivity).connectedToNetwork) {
+            binding.root.findNavController()
+                .navigate(
+                    MovieListFragmentDirections
+                        .actionMovieListFragmentToMovieDetailsFragment(imdbId)
+                )
+        } else {
+            (activity as MainActivity).displayOfflineSnack()
+        }
     }
 }
 
