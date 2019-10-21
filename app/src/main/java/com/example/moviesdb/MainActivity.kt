@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel: SharedViewModel
     lateinit var binding: ActivityMainBinding
-    var connectedToNetwork = false
+    var connectedToNetwork = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity() {
             if (!it) {
                 displayOfflineSnack()
             } else {
-                binding.clMain.showSnackBar("Internet in back. You can resume using app now.")
+                if (!connectedToNetwork)
+                    binding.clMain.showSnackBar("Internet is back. You can resume using app now.")
             }
             connectedToNetwork = it
         })

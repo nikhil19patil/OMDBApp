@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesdb.MainActivity
 import com.example.moviesdb.databinding.FragmentSearchMovieBinding
@@ -29,7 +30,6 @@ class SearchMovieFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         viewModel.searchKeyList.observe(this, Observer {
             adapter.searchKeys = it
         })
@@ -69,7 +69,6 @@ class SearchMovieFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onQueryTextSubmit(key: String?): Boolean {
         key?.let {
             insertKeyInDbAndNavigateToMovieListFragment(key)
-
         }
         return false
     }
@@ -87,8 +86,11 @@ class SearchKeyRVAdapter(val callback: ItemClick) : RecyclerView.Adapter<SearchK
 
     var searchKeys: List<SearchKeyModel> = emptyList()
         set(value) {
+            val diffCallback = MovieModelDiffCallBack(searchKeys, value)
+            val diffResult = DiffUtil.calculateDiff(diffCallback)
             field = value
-            notifyDataSetChanged()
+            diffResult.dispatchUpdatesTo(this)
+//            notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchKeyViewHolder {
@@ -111,5 +113,22 @@ class SearchKeyRVAdapter(val callback: ItemClick) : RecyclerView.Adapter<SearchK
 }
 
 class SearchKeyViewHolder(var movieSearchKeyItemBinding: MovieSearchKeyItemBinding) :
-    RecyclerView.ViewHolder(movieSearchKeyItemBinding.root) {
+    RecyclerView.ViewHolder(movieSearchKeyItemBinding.root)
+
+class MovieModelDiffCallBack(private val old: List<SearchKeyModel>, private val new: List<SearchKeyModel>): DiffUtil.Callback() {
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return old[oldItemPosition].key == new[newItemPosition].key
+    }
+
+    override fun getOldListSize(): Int {
+        return old.size
+    }
+
+    override fun getNewListSize(): Int {
+        return new.size
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return old[oldItemPosition].id === new[newItemPosition].id
+    }
 }

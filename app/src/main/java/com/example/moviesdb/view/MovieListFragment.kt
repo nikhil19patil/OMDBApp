@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesdb.MainActivity
 import com.example.moviesdb.databinding.FragmentMovieListBinding
@@ -31,10 +32,16 @@ class MovieListFragment : Fragment() {
             navigateToMovieDetailsFragment(it.imdbID)
         })
         viewModel.movieList.observe(this, Observer {
+            populateData(it)
+        })
+    }
+
+    private fun populateData(it: List<MovieModel>?) {
+        it?.let {
             adapter.movies = it
             viewModel.showProgressBar.value = false
             viewModel.showEmptyListMsg.value = it.isEmpty()
-        })
+        }
     }
 
     override fun onCreateView(
@@ -47,8 +54,16 @@ class MovieListFragment : Fragment() {
         val args = MovieListFragmentArgs.fromBundle(arguments!!)
         (activity as MainActivity).setToolbarTitle("Results for \"${args.searchKey}\"")
         (activity as MainActivity).setBackButtonEnabled(true)
+        if (null != viewModel.movieList.value) {
+            populateData(viewModel.movieList.value)
+        } else {
+            if ((activity as MainActivity).connectedToNetwork) {
+                viewModel.fetchMovies(args.searchKey)
+            } else {
+                (activity as MainActivity).displayOfflineSnack()
+            }
+        }
         binding.recyclerView.adapter = adapter
-        viewModel.fetchMovies(args.searchKey)
         return binding.root
     }
 

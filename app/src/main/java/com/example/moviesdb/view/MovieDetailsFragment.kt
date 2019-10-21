@@ -29,7 +29,12 @@ class MovieDetailsFragment : Fragment() {
         val args = MovieDetailsFragmentArgs.fromBundle(arguments!!)
         val imdbID = args.imdbId
         binding.lifecycleOwner = this
-        viewModel.fetchMovieDetails(imdbID)
+
+        if ((activity as MainActivity).connectedToNetwork) {
+            viewModel.fetchMovieDetails(imdbID)
+        } else {
+            (activity as MainActivity).displayOfflineSnack()
+        }
         (activity as MainActivity).setBackButtonEnabled(true)
         return binding.root
     }
@@ -39,6 +44,8 @@ class MovieDetailsFragment : Fragment() {
 
         viewModel.movieDetails.observe(this, Observer {
             binding.movie = it
+            binding.progressCircular?.visibility = View.GONE
+            binding.svMain?.visibility = View.VISIBLE
             (activity as MainActivity).setToolbarTitle(it.Title)
         })
     }
