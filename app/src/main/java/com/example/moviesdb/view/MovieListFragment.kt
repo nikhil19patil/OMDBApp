@@ -67,12 +67,12 @@ class MovieListFragment : Fragment() {
         return binding.root
     }
 
-    private fun navigateToMovieDetailsFragment(imdbId: String) {
+    private fun navigateToMovieDetailsFragment(imdbId: String?) {
         if ((activity as MainActivity).connectedToNetwork) {
             binding.root.findNavController()
                 .navigate(
                     MovieListFragmentDirections
-                        .actionMovieListFragmentToMovieDetailsFragment(imdbId)
+                        .actionMovieListFragmentToMovieDetailsFragment(imdbId?:"")
                 )
         } else {
             (activity as MainActivity).displayOfflineSnack()

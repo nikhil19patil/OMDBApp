@@ -46,7 +46,9 @@ class MovieDetailsFragment : Fragment() {
             binding.movie = it
             binding.progressCircular?.visibility = View.GONE
             binding.svMain?.visibility = View.VISIBLE
-            (activity as MainActivity).setToolbarTitle(it.Title)
+            it.Title?.let { title ->
+                (activity as MainActivity).setToolbarTitle(title)
+            }
         })
     }
 }
