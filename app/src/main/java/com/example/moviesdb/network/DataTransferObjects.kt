@@ -10,7 +10,7 @@ import com.squareup.moshi.JsonClass
  */
 
 @JsonClass(generateAdapter = true)
-data class NetworkMoviesContainer(val Search: List<Movie>)
+data class NetworkMoviesContainer(val Search: List<Movie>?)
 
 @JsonClass(generateAdapter = true)
 data class Movie(
@@ -50,7 +50,7 @@ data class NetworkMovieDetail(
 )
 
 fun NetworkMoviesContainer.asDomainModel(): List<MovieModel> {
-    return Search.map {
+    return Search?.map {
         MovieModel(
             Title = it.Title,
             Year = it.Year,
@@ -59,6 +59,7 @@ fun NetworkMoviesContainer.asDomainModel(): List<MovieModel> {
             Poster = it.Poster
         )
     }
+        ?: ArrayList()
 }
 
 fun NetworkMovieDetail.asDomainModel(): MovieDetails {

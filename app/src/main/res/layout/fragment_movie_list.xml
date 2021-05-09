@@ -47,8 +47,8 @@
             android:layout_height="wrap_content"
             android:text="@string/movie_list_empty_msg"
             android:visibility="@{viewModel.showEmptyListMsg? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
-            app:layout_constraintEnd_toEndOf="@+id/searchView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
